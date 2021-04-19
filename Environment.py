@@ -1,3 +1,6 @@
+from Tiles import Tiles
+import gen_random_env
+import 
 class Environment:
     def __init__(self, random):
         self.TileList = []
@@ -7,7 +10,7 @@ class Environment:
             self.importTileFile()
     
     def randomTiles(self):
-        #randomly fill in the tiles in the list
+        self.TileList = gen_random_env.gen_smoothed_random_env()
     
     def importTileFile(self):
         #fill in the board based on a file
