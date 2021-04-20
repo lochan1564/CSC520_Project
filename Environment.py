@@ -1,6 +1,5 @@
 from Tiles import Tiles
 import gen_random_env
-import 
 class Environment:
     def __init__(self, random):
         self.TileList = []
