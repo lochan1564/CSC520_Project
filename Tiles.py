@@ -69,7 +69,8 @@ class Tiles():
             self.social_cost = 100.0
             self.env_cost = 100.0
     
-    def getCost(self, tile_id):
+    def getCost(self):
+        # TODO consider society's priorities to weigh each of these
         return (self.economic_cost, self.social_cost, self.env_cost)
     
     def setTileName(self, tile_id): # description of the tile
