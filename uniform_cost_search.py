@@ -16,7 +16,8 @@ def uniform_cost_search(environment, begin_pos, goal_positions):
         path_cost, pos, path = curr
         # if another industry has been found then stop the search
         if pos in goal_positions:
-            return path
+            # do not need last position because we are only concerned with roads touching goal
+            return path[:-1]
         curr_x, curr_y = pos
         locs_visited.add((curr_x, curr_y))
         # look around in each direction to expand
@@ -38,26 +39,27 @@ def uniform_cost_search_roads_built(environment):
 
     # get all permutations of the industry locations in order to look through performing uniform cost search
     # on the locations in every possible order to find most optimal
-    all_permutations = permutations(industry_locs)
+    all_permutations = [list(p) for p in permutations(industry_locs)]
     roads_built_all_perm = []
     for industry_locs_perm in all_permutations:
-        
         # keep a list of all of the positions that roads have been built on
-        roads_built = []
+        goals = [industry_locs_perm.pop()]
+
         while len(industry_locs_perm) != 0:
             industry_loc = industry_locs_perm.pop()
 
-            road_path = uniform_cost_search(environment, industry_loc, industry_locs_perm + roads_built)
-            roads_built += road_path
+            road_path = uniform_cost_search(environment, industry_loc, goals)
+            goals += [industry_loc] + road_path
 
-        roads_built_all_perm.append(roads_built)
+        # exclude the industry locations from roads being built
+        roads_built_all_perm.append([goal for goal in goals if goal not in industry_locs])
 
     # attempt to find the most optimal road network from all of the permutations tried
     min_total_cost = float('inf')
     most_optimal_road_network = None
     for road_network in roads_built_all_perm:
         # get the total cost incurred by this road network
-        total_cost = sum(sum(environment.getTile(position).getCost()) for position in road_network)
+        total_cost = sum(sum(environment.getTile(*position).getCost()) for position in road_network)
         # indicate that this road network is most optimal if needed
         if total_cost < min_total_cost:
             min_total_cost = total_cost

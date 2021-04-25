@@ -7,7 +7,7 @@ class Environment:
         if random:
             self.randomTiles()
         else:
-            self.importTileFile()
+            self.importTileFile(fileName)
     
     def randomTiles(self):
         self.TileList = gen_random_env.gen_smoothed_random_env()
@@ -16,7 +16,7 @@ class Environment:
         self.TileList = test_tiles.importFromFile(fileName)
     
     def getTile(self, x, y):
-        if(x >= 0 and x <= 15 and y >= 0 and y <= 15):
-            return self.TileList[x][y]
+        if(x >= 0 and x < 15 and y >= 0 and y < 15):
+            return self.TileList[y][x]
         else:
             return None

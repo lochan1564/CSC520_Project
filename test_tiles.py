@@ -32,11 +32,13 @@ def importFromFile(tileFile):
         #print(tile_list[i].y_coord)
         #print(tile_list[i].tile_id)
 
-    board = np.full(tuple([15]*2),"   ")
+    board = [[None for _ in range(15)] for _ in range(15)]
+
+    # board = np.full(tuple([15]*2),"   ")
 
     for i in range(15):
         for j in range(15):
-            board[i][j] = tile_list[i*15+j].tile_id
+            board[i][j] = tile_list[i*15+j]
             #board[i][j] = tile_list[i*15+j].tile_name
 
     return board
