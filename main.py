@@ -1,11 +1,20 @@
-import Environment
-import Tiles
-import uniform_cost_search
+import uniform_cost_search as ucs
+import Search as astar
+from Environment import Environment
+import Search
 
 file = open("setup.txt", r)
 #need to get the file name, start postion, and end position
+rand = file.readline()
+if(rand == 'Y'):
+    env = Environment(True, None)
+else:
+    boardFile = file.readline()   
+    env = Environment(False, boardFile)
 
-env = Environment(false, "Board_summary.csv")
+uniform = ucs.uniform_cost_search_roads_built(env)
+print(uniform)
 
-uniform_cost_search(env, start, goal)
+astar = astar.a_star_search_roads_built(env)
+print(astar)
 
