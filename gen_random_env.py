@@ -16,7 +16,7 @@ def gen_completely_random_env():
 def gen_smoothed_random_env():
     grid = [[None for _ in range(DIM)] for _ in range(DIM)]
 
-    num_industries = random.randint(DIM // 4, DIM // 2)
+    num_industries = 5#random.randint(3, 5)
     # create a list of DIM randomly selected points
     industries = []
     for _ in range(num_industries):
@@ -101,85 +101,20 @@ def gen_smoothed_random_env():
 
     return grid
 
+def generate_random_environments():
+    for i in range(3):
+        env = gen_completely_random_env()
+        with open(f'environments/completely_random_env_{i}.csv', 'w') as f:
+            f.write('x,y,id\n')
+            for row in env:
+                for tile in row:
+                    f.write(f'{tile.x_coord},{tile.y_coord},{tile.tile_id}\n')
+                
 
-# def gen_smoothed_random_env_old():
-    # grid = []
-    # for y in range(DIM):
-    #     row = []
-    #     for x in range(DIM):
-            
-    #         # get a tile with values averaged from all points
-    #         tile = Tile(0, 0, 0)
-    #         for i, (_, tile_info) in enumerate(industries):
-    #             weight = weights[i]
-    #             tile.env += tile_info.env * weight
-    #             tile.econ += tile_info.econ * weight
-    #             tile.soc += tile_info.soc * weight
-
-    #         row.append(tile)
-    #     grid.append(row)
-    # return grid
-
-
-    # num_points = random.randint(DIM // 3, DIM)
-    # # create a list of DIM randomly selected points
-    # points = []
-    # for _ in range(num_points):
-    #     location = (random.randint(0, DIM - 1), random.randint(0, DIM - 1))
-    #     vals = rand_tile()
-    #     # only add this point to the list if there is not one at this location already
-    #     if sum(point_loc == location for point_loc, _ in points) == 0:
-    #         points.append((location, vals))
-
-    # grid = []
-    # for y in range(DIM):
-    #     row = []
-    #     for x in range(DIM):
-    #         # get the distances from each random point to this (x, y) location
-    #         dist_from_each = [(x - px) ** 2 + (y - py) ** 2 for (px, py), _ in points]
-
-    #         # compute 'normalized' distances in which the sum of all distances is 0
-            
-    #         inv_dist = [float('inf') if d == 0 else 1 / d for d in dist_from_each]
-    #         sum_inv_dist = sum(inv_dist)
-    #         weights = [1 if d == float('inf') else d / sum_inv_dist for d in inv_dist]
-            
-    #         # get a tile with values averaged from all points
-    #         tile = Tile(0, 0, 0)
-    #         for i, (_, tile_info) in enumerate(points):
-    #             weight = weights[i]
-    #             tile.env += tile_info.env * weight
-    #             tile.econ += tile_info.econ * weight
-    #             tile.soc += tile_info.soc * weight
-
-    #         row.append(tile)
-    #     grid.append(row)
-    # return grid
-
-def print_smoothed_env():
-    grid = gen_smoothed_random_env()
-    for row in grid:
-        for tile in row:
-            if tile.tile_id == 0:
-                print('_', end=' ')
-            elif tile.tile_id == 1:
-                print('F', end=' ')
-            elif tile.tile_id == 2:
-                print('|', end=' ')
-            elif tile.tile_id == 3:
-                print('^', end=' ')
-            elif tile.tile_id == 4:
-                print('~', end=' ')
-            elif tile.tile_id == 5:
-                print('E', end=' ')
-            elif tile.tile_id == 6:
-                print('#', end=' ')
-            elif tile.tile_id == 7:
-                print('R', end=' ')
-            elif tile.tile_id == 8:
-                print('F', end=' ')
-            elif tile.tile_id == 9:
-                print('X', end=' ')
-        print()
-
-# print_smoothed_env()
+    for i in range():
+        env = gen_smoothed_random_env()
+        with open(f'environments/smoothed_random_env_{i}.csv', 'w') as f:
+            f.write('x,y,id\n')
+            for row in env:
+                for tile in row:
+                    f.write(f'{tile.x_coord},{tile.y_coord},{tile.tile_id}\n')

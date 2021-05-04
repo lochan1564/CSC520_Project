@@ -1,3 +1,4 @@
+econ_weight, soc_weight, env_weight = 1.0, 1.0, 1.0
 
 # Class for Tiles
 class Tiles():
@@ -74,7 +75,10 @@ class Tiles():
             self.env_cost = 100.0
     
     def getCost(self):
-        return (self.weights[0]*self.economic_cost, self.weights[1]*self.social_cost, self.weights[2]*self.env_cost)
+        return econ_weight*self.economic_cost + soc_weight*self.social_cost + env_weight*self.env_cost
+
+    def getCostTuple(self):
+        return (econ_weight*self.economic_cost, soc_weight*self.social_cost, env_weight*self.env_cost)
     
     def setTileName(self, tile_id): # description of the tile
         
