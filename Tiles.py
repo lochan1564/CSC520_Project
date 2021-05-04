@@ -10,12 +10,16 @@ class Tiles():
         self.economic_cost = 0.05
         self.social_cost = 0.05
         self.env_cost = 0.05
+        self.weights = (1.0, 1.0, 1.0)
         self.tile_name = 'FlatOpen'
         self.tile_status = 'Passable'
         self.setTileName(self.tile_id)
         self.setTile_status(self.tile_id)
         self.setCost(self.tile_id)
         #return
+        
+    def setWeight(self, eco, soc, env):
+        self.weights = (eco, soc, env)
         
     def setCost(self, tile_id):
         
@@ -70,8 +74,7 @@ class Tiles():
             self.env_cost = 100.0
     
     def getCost(self):
-        # TODO consider society's priorities to weigh each of these
-        return (self.economic_cost, self.social_cost, self.env_cost)
+        return (self.weights[0]*self.economic_cost, self.weights[1]*self.social_cost, self.weights[2]*self.env_cost)
     
     def setTileName(self, tile_id): # description of the tile
         
