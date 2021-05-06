@@ -14,4 +14,6 @@ If you want environmental to be twice as important as the others you would do as
 The final line is optional for if you want to read the board in from a file. For example for our tests we used the file Board_Summary.csv. You can create your own csv file
 to represent a board. Each row in the file represents the x coordinate, the y coordinate, and the terrain id for the tile at that postion.
 
+The program should be executed from the main.py file. From the project directory run: python main.py
+
 If you have any questions reach out to bjlayko@ncsu.edu
