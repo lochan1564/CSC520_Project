@@ -38,54 +38,6 @@ def write_to_image(env, road_locations, output_file):
         png.Writer(15, 15, greyscale=False).write(f, rows)
 
 
-# file = open("setup.txt", 'r')
-# #need to get the file name, start postion, and end position
-# rand = file.readline()
-
-# Tiles.econ_weight = float(file.readline())
-# Tiles.soc_weight = float(file.readline())
-# Tiles.env_weight = float(file.readline())
-
-# if(rand == 'Y'):
-#     env = Environment(True, None)
-# else:
-#     boardFile = file.readline()   
-#     env = Environment(False, boardFile)
-
-# uniform = uniform_cost_search_roads_built(env)
-# print(uniform)
-# envCost = 0 
-# ecoCost = 0
-# socCost = 0
-# for tileCoord in uniform:
-#     costs = env.getTile(tileCoord[0], tileCoord[1]).getCostTuple()
-#     ecoCost += costs[0]
-#     socCost += costs[1]
-#     envCost += costs[2]
-# print("UCS Economic cost: "+ str(ecoCost))
-# print("UCS Social cost: "+ str(socCost))
-# print("UCS Environmental cost: "+ str(envCost))
-# print("UCS total cost:", envCost + ecoCost + socCost)
-# write_to_image(env, uniform, 'ucs_environment_roads.png')
-
-
-# astar = a_star_search_roads_built(env)
-# print(astar)
-
-# envCost = 0 
-# ecoCost = 0
-# socCost = 0
-# for tileCoord in astar:
-#     costs = env.getTile(tileCoord[0], tileCoord[1]).getCostTuple()
-#     ecoCost += costs[0]
-#     socCost += costs[1]
-#     envCost += costs[2]
-# print("AStar Economic cost: "+ str(ecoCost))
-# print("AStar Social cost: "+ str(socCost))
-# print("AStar Environmental cost: "+ str(envCost))
-# print("AStar total cost:", envCost + ecoCost + socCost)
-# write_to_image(env, astar, 'astar_environment_roads.png')
-
 file = open("setup.txt", 'r')
 #need to get the file name, start postion, and end position
 rand = file.readline()
@@ -94,47 +46,42 @@ Tiles.econ_weight = float(file.readline())
 Tiles.soc_weight = float(file.readline())
 Tiles.env_weight = float(file.readline())
 
-files = (
-    # 'Board_summary',
-    # 'completely_random_env_0', 'completely_random_env_1', 'completely_random_env_2',
-    'smoothed_random_env_0',
-    'smoothed_random_env_1',
-    'smoothed_random_env_2',
-)
-for file_name in files:
-    env = Environment(False, 'environments/' + file_name + '.csv')
-    # write_to_image(env, [], 'environment_road_images/' + file_name + '_unmodified.png')
+if(rand == 'Y'):
+    env = Environment(True, None)
+else:
+    boardFile = file.readline()   
+    env = Environment(False, boardFile)
 
-    uniform = uniform_cost_search_roads_built(env)
-    print(uniform)
-    envCost = 0 
-    ecoCost = 0
-    socCost = 0
-    for tileCoord in uniform:
-        costs = env.getTile(tileCoord[0], tileCoord[1]).getCostTuple()
-        ecoCost += costs[0]
-        socCost += costs[1]
-        envCost += costs[2]
-    print(file_name + " UCS Economic cost: "+ str(ecoCost))
-    print(file_name + " UCS Social cost: "+ str(socCost))
-    print(file_name + " UCS Environmental cost: "+ str(envCost))
-    print(file_name + " UCS total cost:", envCost + ecoCost + socCost)
-    write_to_image(env, uniform, 'environment_road_images/' + file_name + '_ucs.png')
+uniform = uniform_cost_search_roads_built(env)
+print(uniform)
+envCost = 0 
+ecoCost = 0
+socCost = 0
+for tileCoord in uniform:
+    costs = env.getTile(tileCoord[0], tileCoord[1]).getCostTuple()
+    ecoCost += costs[0]
+    socCost += costs[1]
+    envCost += costs[2]
+print("UCS Economic cost: "+ str(ecoCost))
+print("UCS Social cost: "+ str(socCost))
+print("UCS Environmental cost: "+ str(envCost))
+print("UCS total cost:", envCost + ecoCost + socCost)
+write_to_image(env, uniform, 'ucs_environment_roads.png')
 
 
-    astar = a_star_search_roads_built(env)
-    print(astar)
+astar = a_star_search_roads_built(env)
+print(astar)
 
-    envCost = 0 
-    ecoCost = 0
-    socCost = 0
-    for tileCoord in astar:
-        costs = env.getTile(tileCoord[0], tileCoord[1]).getCostTuple()
-        ecoCost += costs[0]
-        socCost += costs[1]
-        envCost += costs[2]
-    print(file_name + " AStar Economic cost: "+ str(ecoCost))
-    print(file_name + " AStar Social cost: "+ str(socCost))
-    print(file_name + " AStar Environmental cost: "+ str(envCost))
-    print(file_name + " AStar total cost:", envCost + ecoCost + socCost)
-    write_to_image(env, astar, 'environment_road_images/' + file_name + '_astar.png')
+envCost = 0 
+ecoCost = 0
+socCost = 0
+for tileCoord in astar:
+    costs = env.getTile(tileCoord[0], tileCoord[1]).getCostTuple()
+    ecoCost += costs[0]
+    socCost += costs[1]
+    envCost += costs[2]
+print("AStar Economic cost: "+ str(ecoCost))
+print("AStar Social cost: "+ str(socCost))
+print("AStar Environmental cost: "+ str(envCost))
+print("AStar total cost:", envCost + ecoCost + socCost)
+write_to_image(env, astar, 'astar_environment_roads.png')
